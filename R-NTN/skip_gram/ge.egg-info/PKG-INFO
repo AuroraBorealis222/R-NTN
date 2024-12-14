@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: ge
+Version: 0.0.0
+Home-page: https://github.com/shenweichen/GraphEmbedding
+Author: Weichen Shen
+Author-email: weichenswc@163.com
+License: MIT license
+Requires-Python: >=3.5
+License-File: LICENSE
+Requires-Dist: gensim>=4.0.0
+Requires-Dist: networkx
+Requires-Dist: joblib
+Requires-Dist: fastdtw
+Requires-Dist: tqdm
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+Requires-Dist: deepctr
+Provides-Extra: cpu
+Requires-Dist: tensorflow!=1.7.*,!=1.8.*,>=1.4.0; extra == "cpu"
+Provides-Extra: gpu
+Requires-Dist: tensorflow-gpu!=1.7.*,!=1.8.*,>=1.4.0; extra == "gpu"
