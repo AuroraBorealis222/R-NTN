@@ -6,37 +6,31 @@ from collections import defaultdict
 
 class RandomWalker:
     def __init__(self, G, transaction_volume, transaction_volume_between):
-        """
-        :param G: 输入的图
-        """
+       
         self.G = G
         self.transaction_volume = transaction_volume
         self.transaction_volume_between = transaction_volume_between
         self.transition_probs = {}
 
     def preprocess_transition_probs(self):
-        """
-        预处理转移概率
-        """
+       
         for node in self.G.nodes():
             neighbors = list(self.G.neighbors(node))
             if len(neighbors) == 0:
-                continue  # 如果没有邻居，则跳过该节点
+                continue 
 
             probs = []
-            # print(f"变量 node 的数据类型: {type(node)}")
-            # print(f"字典中键的值的数据类型: {type(next(iter(self.transaction_volume.values())))}")
 
             total_volume = self.transaction_volume[node]
             for neighbor in neighbors:
                 prob = self.transaction_volume_between[node][neighbor] / total_volume if total_volume > 0 else 0
                 probs.append(prob)
-            # 归一化处理
+            
             total_prob = sum(probs)
             if total_prob > 0:
                 probs = [p / total_prob for p in probs]
             else:
-                probs = [1 / len(neighbors)] * len(neighbors)  # 如果总概率为0，则均匀分布
+                probs = [1 / len(neighbors)] * len(neighbors)  
             self.transition_probs[node] = probs
 
     def node2vec_walk(self, walk_length, start_node):
@@ -60,13 +54,13 @@ class RandomWalker:
         return walk
 
     def next_node(self, cur, cur_nbrs, prev=None):
-        # 获取预处理的转移概率
+        
         if cur in self.transition_probs:
             probs = self.transition_probs[cur]
         else:
-            probs = [1 / len(cur_nbrs)] * len(cur_nbrs)  # 如果没有预处理的概率，则均匀分布
+            probs = [1 / len(cur_nbrs)] * len(cur_nbrs)  
 
-        # 根据转移概率选择下一个节点
+        
         next_node = np.random.choice(cur_nbrs, p=probs)
         return next_node
 
