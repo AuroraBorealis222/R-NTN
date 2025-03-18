@@ -3,10 +3,9 @@ import numpy as np
 from gensim.models import Word2Vec
 from gensim.models.callbacks import CallbackAny2Vec
 
-from ..walker import RandomWalker  # 确保导入路径正确
+from ..walker import RandomWalker  
 
 
-# 定义一个回调函数来输出训练的进度
 class EpochLogger(CallbackAny2Vec):
     def __init__(self):
         self.epoch = 0
@@ -35,7 +34,7 @@ class Node2Vec:
         self.walker = RandomWalker(graph, transaction_volume, transaction_volume_between)
 
         print("Preprocess transition probs...")
-        # 确保 RandomWalker 类中有 preprocess_transition_probs 方法
+        
         self.walker.preprocess_transition_probs()
 
         self.sentences = self.walker.simulate_walks(
@@ -68,12 +67,12 @@ class Node2Vec:
 
         self._embeddings = {}
         for node in self.graph.nodes():
-            # 确保节点是可用作字典键的类型
+            
             if not isinstance(node, (int, str)):
                 print(f"Node '{node}' is not a valid type for a dictionary key.")
                 continue
 
-            # 尝试获取嵌入向量
+           
             try:
                 vector = self.w2v_model.wv[node]
             except KeyError:
@@ -83,7 +82,7 @@ class Node2Vec:
                 print(f"TypeError encountered for node '{node}': {e}")
                 continue
 
-            # 确保向量是期望的类型（例如列表或 NumPy 数组）
+            
             if not isinstance(vector, (list, np.ndarray)):
                 print(f"Vector for node '{node}' is not a list or NumPy array: {type(vector)}")
                 continue
