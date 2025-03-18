@@ -117,7 +117,7 @@ def calculate_difference(input_total, output_total):
 def calculate_ratio(num1, num2):
     if isinstance(num1, list) and isinstance(num2, list):
         if len(num1) != len(num2):
-            raise ValueError("当两个列表进行运算时，它们的长度必须相同")
+            raise ValueError("When two lists are operated on, they must be the same length")
         ratio = [(n / m) if m != 0 else 0 for n, m in zip(num1, num2)]
     elif isinstance(num1, list):
         ratio = [(n / num2) if num2 != 0 else 0 for n in num1]
@@ -252,11 +252,10 @@ def calculate_degrees(G, node):
     if node not in G:
         return None, None, None
 
-    # 计算入度和出度
+
     in_degree = G.in_degree(node)
     out_degree = G.out_degree(node)
 
-    # 计算总度数
     total_degree = in_degree + out_degree
 
     return in_degree, out_degree, total_degree
