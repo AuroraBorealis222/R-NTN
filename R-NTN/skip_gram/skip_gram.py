@@ -85,12 +85,11 @@ if __name__ == "__main__":
     with open('2-hop.pkl', 'rb') as file:
         G = pickle.load(file)
 
-    # 确保图是有向的
+    
     G = nx.DiGraph(G)
-    # for node in G.nodes():
-    #     print(f"节点 '{node}' 的数据类型是: {type(node)}")
+    
 
-    csv_file = '边文件.csv'
+    csv_file = 'edg.csv'
     transaction_volume, transaction_volume_between = build_transaction_dicts(csv_file)
 
     model = Node2Vec(G, transaction_volume, transaction_volume_between, walk_length=20, num_walks=50, workers=24)
