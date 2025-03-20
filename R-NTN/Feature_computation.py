@@ -325,7 +325,7 @@ def module_226(graph: nx.Graph, node_index):
     if node_index in graph:
         return local_clustering(graph, node_index)
     else:
-        return f"node {node_index} doesn't exist in the graph。"
+        return f"node {node_index} doesn't exist in the graph"
 
 
 def precompute_closeness_centrality(graph: nx.Graph, filename="closeness_centrality.pkl"):
