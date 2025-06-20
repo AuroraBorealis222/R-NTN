@@ -24,6 +24,7 @@ If you would like to quickly try out the model using our preprocessed data, simp
 
 ```bash
 python XGB.py
+```
 This will train and evaluate the XGBoost model on our dataset.
 
 🔹 Option 2: Use your own dataset
@@ -32,16 +33,17 @@ If you wish to apply the pipeline to your own data, follow these steps:
 Run feature extraction:
 ```bash
 python Feature_acquisition.py
-
+```
 Run skip-gram encoding (optional, for behavioral/semantic embeddings):
 ```bash
 python skip_gram/skip_gram.py
-
+```
 These scripts will generate a .csv file containing extracted features.
 
 Train the model:
 ```bash
 python XGB.py
+```
 Make sure your generated CSV is correctly referenced in XGB.py.
 
 
@@ -54,4 +56,6 @@ xgboost
 tqdm
 
 You can install them with:
+```bash
 pip install -r requirements.txt
+```
