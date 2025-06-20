@@ -29,11 +29,11 @@ This will train and evaluate the XGBoost model on our dataset.
 🔹 Option 2: Use your own dataset
 If you wish to apply the pipeline to your own data, follow these steps:
 
-Run feature extraction:
+Extract node behavioral features and graph-based transaction features:
 ```bash
 python Feature_acquisition.py
 ```
-Run skip-gram encoding (optional, for behavioral/semantic embeddings):
+Extract Graph-Based Network Features:
 ```bash
 python skip_gram/skip_gram.py
 ```
