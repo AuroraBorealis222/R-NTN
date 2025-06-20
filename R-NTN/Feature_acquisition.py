@@ -33,11 +33,28 @@ def process_node(node, G):
     df = computing(G, node)
     return df
 
-
+def get_balanced_isp_nodes(G, seed=None):
+   
+    if seed is not None:
+        random.seed(seed)
+    
+    isp1_nodes = [n for n, attr in G.nodes(data=True) if attr.get('isp') == 1]
+    isp0_nodes = [n for n, attr in G.nodes(data=True) if attr.get('isp') == 0]
+    
+    min_count = min(len(isp1_nodes), len(isp0_nodes))
+    
+    sampled_isp1 = random.sample(isp1_nodes, min_count)
+    sampled_isp0 = random.sample(isp0_nodes, min_count)
+    
+    balanced_nodes = sampled_isp1 + sampled_isp0
+    random.shuffle(balanced_nodes)
+    print(f"Selected {min_count} nodes for each class (isp=1 and isp=0). Total nodes: {len(balanced_nodes)}")
+    return balanced_nodes
+    
 def read_and_process_graph(graph_path, output_csv):
     with open(graph_path, 'rb') as f:
         G = pickle.load(f)
-    nodes = get_isp1_nodes_and_random(G)
+    nodes = get_balanced_isp_nodes(G, seed=42)  
     batch_size = 5
     with ProcessPoolExecutor() as executor:
         for i in tqdm(range(0, len(nodes), batch_size), desc="Processing nodes"):
@@ -47,6 +64,7 @@ def read_and_process_graph(graph_path, output_csv):
             for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), desc="Processing batch"):
                 batch_df = pd.concat([batch_df, future.result()], ignore_index=True)
             append_df_to_csv(batch_df, output_csv)
+
 
 
 if __name__ == '__main__':
