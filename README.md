@@ -5,7 +5,7 @@ This repository provides a lightweight pipeline for detecting phishing addresses
 ---
 
 ## 📦 Project Structure
-
+```bash 
 ├── dataset  #Dataset files
 ├── Feature_acquisition.py # Feature extraction entry
 ├── Feature_computation.py   #Feature extraction helper function
@@ -14,7 +14,7 @@ This repository provides a lightweight pipeline for detecting phishing addresses
 ├── computation.py # Feature extraction helper function
 ├── XGB.py # XGBoost model training and evaluation
 ├── requirements.txt #Dependencies
-
+```
 ## 🚀 Quick Start
 
 ### 🔹 Option 1: Use our provided dataset
